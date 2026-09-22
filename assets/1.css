@@ -1,0 +1,47 @@
+/* ==========================================================================
+   1.css — сцена страницы 1.
+   ТОЛЬКО позиции/размеры/z-index слоёв сцены (в % от размеров #scene,
+   считаются по макету Figma). Базовые стили — .scene__img в main.css.
+   ========================================================================== */
+
+#forest     {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+#house      {
+  left: 43.33%;
+  top: 4.73%;
+  width: 56.66%;
+  z-index: 3;
+}
+#footsteps  {
+  left: 26.1%;
+  top: 70.41%;
+  width: 13.48%;
+  z-index: 3;
+  opacity: 0;
+}
+#fence      {
+  left: 39.79%;
+  top: 59.16%;
+  width: 59.96%;
+  z-index: 4;
+}
+#snow-left  {
+  left: 0;
+  bottom: 0;
+  width: 75.36%;
+  z-index: 5;
+}
+#snow-right {
+  right: 0;
+  bottom: 0;
+  width: 85.15%;
+  z-index: 6;
+}
+
+.visible {
+  opacity: 1;
+}

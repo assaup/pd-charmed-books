@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 1</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 1.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/1.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>
+          Последний школьный звонок, пронзительный и радостный, отзвенел, разрезая морозный воздух. Айбек вышел из шумного, наполненного смехом и гомоном здания, поправил на плече ранец, туго набитый учебниками, и глубоко вдохнул. Воздух был звенящим и колким, пах ёлкой, дымком из печных труб и предвкушением чуда.
+        </p>
+        <p>
+          Он не пошёл по прямой дороге домой, где его ждала бы тёплая комната и чашка горячего шоколада. Вместо этого он направился в сторону озера. Сегодня была пятница, а по пятницам у него была своя, особенная традиция — прогулка к дедушке Дастану, который в это время всегда сидел на берегу, подставляя лицо зимнему ветру и глядя на бесконечную водную гладь.
+        </p>
+        <p>
+          Улицы маленького городка, притулившегося к самому подножию величественных гор, дремали под глубоким, пушистым снегом. Айбек завернул в узкий переулок между заборами, где снег лежал ещё нетронутым, сахарно-белым покрывалом.
+        </p>
+        <p>
+          Отсюда, с пригорка, открывался самый лучший вид. Айбек замедлил шаг, запрокинул голову и замер. Озеро лежало перед ним — огромное, тёмное, загадочное и величественное.
+        </p>
+        <p>
+          Он обогнал стайку воробьев, кувыркающихся в снегу у большой деревянной кормушки, и, промчавшись мимо старой каменной арки, наконец выбрался на набережную. Здесь было тихо и пустынно.
+        </p>
+        <img id="undertext" src="./assets/img/page-1/layer-8-3.png" alt="">
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — сюда помещаются слои-изображения.
+         Каждый слой: <img class="scene__img" id="имя" src="..." alt="">.
+         Позиции и размеры (в % от #scene, по макету Figma) — в 1.css,
+         анимацию/интерактив — в page1.js.
+         #overflow-wrapper не даёт слоям вылезать за границы сцены
+         при анимациях; если ничего не вылезает — можно удалить.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="forest"     src="./assets/img/page-1/forest.png"     alt="Лес">
+        <img class="scene__img" id="house"      src="./assets/img/page-1/house.png"      alt="Дом">
+        <img class="scene__img" id="footsteps"  src="./assets/img/page-1/footsteps.png"  alt="Следы">
+        <img class="scene__img" id="fence"      src="./assets/img/page-1/fence.png"      alt="Забор">
+        <img class="scene__img" id="snow-left"  src="./assets/img/page-1/snow-left.png"  alt="Снег">
+        <img class="scene__img" id="snow-right" src="./assets/img/page-1/snow-right.png" alt="Снег">
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 1 -->
+  <script src="./assets/page1.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
