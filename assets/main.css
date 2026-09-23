@@ -154,7 +154,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #ffffff;
+  background: rgba(11, 8, 36, 1);
   overflow: hidden;
   font-family: "Montserrat Alternates", Arial, sans-serif;
 }
@@ -193,7 +193,6 @@ main::-webkit-scrollbar {
   width: calc(360px + 1320 * ((100vw - 767px) / (3840 - 767)));
   min-height: calc(600px + 200 * ((100vw - 767px) / (3840 - 767)));
   z-index: 4;
-  background: transparent;
   overflow-y: auto;
 }
 #content::-webkit-scrollbar {
@@ -215,6 +214,7 @@ main::-webkit-scrollbar {
   flex-direction: column;
   align-items: center;
   padding: calc(40px + 56 * ((100vw - 767px) / (1920 - 767)));
+  background-color: rgba(11, 8, 36, 1)
 }
 #textbox h1 {
   margin-bottom: 30px;
@@ -223,7 +223,7 @@ main::-webkit-scrollbar {
   line-height: 100%;
   letter-spacing: -1px;
   text-align: center;
-  color: #000000;
+  color: rgba(79, 177, 196, 1);
 }
 #textbox .content-item {
   margin-bottom: 20px;
@@ -234,12 +234,13 @@ main::-webkit-scrollbar {
   margin: 0 0 15px;
   font-size: calc(20px + 8 * ((100vw - 767px) / (1920 - 767)));
   font-weight: 700;
-  color: #000000;
+  color: rgba(79, 177, 196, 1);
 }
 #textbox p {
   font-size: calc(14px + 8 * ((100vw - 767px) / (1920 - 767)));
   line-height: 1.6;
-  color: var(--bk-text, #000000);
+  color: rgba(79, 177, 196, 1);
+
 
   -webkit-hyphens: auto;
   -webkit-hyphenate-limit-before: 3;
