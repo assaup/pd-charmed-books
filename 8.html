@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шепот кода — страница 8</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 6.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/8.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 8</p>
+        <h1>ГЛАВА 2. Знакомство</h1>
+        <div class="content-item">
+          <h3>19.  ДВОР - НОЧЬ / РАССВЕТ</h3>
+          <p>Даяна в истерике сидит во дворе, моля небо о помощи. На рассвете возвращается в квартиру.</p>
+        </div>
+        <div class="content-item">
+          <h3>20.  КВАРТИРА ДАЯНЫ - УТРО</h3>
+          <p>Ноутбук молчит, в чате с нейросетью пусто. Даяна решает, что ей всё показалось, но относит технику в сервис.</p>
+        </div>
+        <div class="content-item">
+          <h3>21.  МГУ / КОФЕЙНЯ - ДЕНЬ</h3>
+          <p>На лекции Аня замечает, что Даяна пишет роман, а не конспект. В кафе выпытывает сюжет про вампира Влада.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — сюда помещаются слои-изображения.
+         Каждый слой: <img class="scene__img" id="имя" src="..." alt="">.
+         Позиции и размеры (в % от #scene, по макету Figma) — в 6.css,
+         анимацию/интерактив — в page6.js.
+         #overflow-wrapper не даёт слоям вылезать за границы сцены
+         при анимациях; если ничего не вылезает — можно удалить.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="main"     src="./assets/img/page-8/main.png"     alt="Девушка слущает музыку">
+        <img class="scene__img" id="pollen"      src="./assets/img/page-8/pollen.png"      alt="Сияние">
+        <img class="scene__img" id="sound"  src="./assets/img/page-8/sound.png"  alt="Линия звука">
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 6 -->
+  <script src="./assets/page8.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
