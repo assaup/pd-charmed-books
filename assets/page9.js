@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var dustDots = document.querySelectorAll(".dust-dot");
 
   /* ===== Мигание лампы ===== */
-  var FLICKER_BASE = 0.8; // средняя яркость
-  var FLICKER_AMPLITUDE = 0.3; // размах колебаний
+  var FLICKER_BASE = 1; // средняя яркость
+  var FLICKER_AMPLITUDE = 0.4; // размах колебаний
 
   function flickerValue(t) {
     var slow = Math.sin(t / 210);
-    var fast = Math.sin(t / 70 + 1.7);
+    var fast = Math.sin(t / 90 + 1.7);
     var mixed = slow * 0.7 + fast * 0.3;
     return FLICKER_BASE + mixed * FLICKER_AMPLITUDE;
   }
