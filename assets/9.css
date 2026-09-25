@@ -1,0 +1,61 @@
+/* ==========================================================================
+   N.css — сцена страницы N «Кухня, разговор при мигающей лампе».
+   Только позиции/размеры/внешний вид слоёв (% от #scene, по макету).
+   Само мигание/дыхание — в pageN.js.
+   ========================================================================== */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ---------- Мигающий свет лампы ---------- */
+/* Прямоугольник примерно по конусу света на картинке (лампа → стол).
+   свет только добавляется к тому, что под ним, а не перекрашивает картинку плашкой поверх. */
+#lamp-glow {
+  position: absolute;
+  left: 33%;
+  top: 0%;
+  width: 34%;
+  height: 55%;
+  background: radial-gradient(closest-side,
+      rgba(255, 250, 225, 0.95) 0%,
+      rgba(190, 230, 255, 0.35) 45%,
+      rgba(190, 230, 255, 0) 80%);
+  mix-blend-mode: screen;
+  opacity: 0.7; /* стартовое значение*/
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity;
+
+}
+
+/* ---------- Пылинки в луче ---------- */
+#dust {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.dust-dot {
+  position: absolute;
+  width: 0.7%;
+  height: 0.7%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160, 235, 255, 1) 0%, rgba(160, 235, 255, 0) 70%);
+  mix-blend-mode: screen;
+  opacity: 0.5; /* стартовое значение*/
+  will-change: opacity;
+}
+
+/* Позиции точек — примерные, по картинке (в % от #scene). */
+.dust-dot:nth-child(1) { left: 45%; top: 15%; }
+.dust-dot:nth-child(2) { left: 49%; top: 19%; }
+.dust-dot:nth-child(3) { left: 53%; top: 16%; }
+.dust-dot:nth-child(4) { left: 47%; top: 22%; }
+.dust-dot:nth-child(5) { left: 56%; top: 21%; }
+.dust-dot:nth-child(6) { left: 50%; top: 26%; }
+.dust-dot:nth-child(7) { left: 44%; top: 25%; }
+.dust-dot:nth-child(8) { left: 58%; top: 25%; }
