@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 9</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 9.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/9.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 9</p>
+        <div class="content-item">
+          <h3>33.  УЛИЦА - ВЕЧЕР</h3>
+          <p>Потрясенная Даяна идет домой. Вернувшись, она пытается искать информацию об ИИ, но безуспешно.</p>
+        </div>
+        <div class="content-item">
+          <h3>34.  КВАРТИРА ДАЯНЫ - НОЧЬ</h3>
+          <p>В дверь стучат. Голос за дверью представляется агентом ЦРУ Дэвидом Саммерсом.</p>
+        </div>
+        <h1>ГЛАВА 4. Агент</h1>
+        <div class="content-item">
+          <h3>35.  КВАРТИРА ДАЯНЫ - НОЧЬ</h3>
+          <p>Агент Дэвид Саммерс (30+, строгий, пронзительный взгляд) входит в квартиру. Даяна в панике.</p>
+          <p>36. Дэвид предъявляет удостоверение ЦРУ. Он задаёт вопросы о неполадках с её техникой, провоцируя её на противоречия.</p>
+          <p>37. Дэвид прямо спрашивает: «Что за программа у вас в технике и как вы с ней взаимодействуете?» Даяна пытается отрицать.</p>
+          <p>38. Дэвид угрожает ей депортацией в США. Даяна стоит на своем, апеллируя к Конституции.</p>
+          <p>39. Дэвид оставляет ей выбор: сотрудничать или отправиться под трибунал, и уходит.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — цельная иллюстрация + два слоя света поверх неё.
+         Позиции — в 9.css, мигание лампы — в page9.js.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-9/bg.png" alt="Агент и Даяна за кухонным столом">
+
+        <!-- Свет лампы: не картинки, а CSS-градиенты. Стили — в 9.css -->
+        <div id="shade" aria-hidden="true"></div>
+        <div id="glow" aria-hidden="true">
+          <div id="cone"></div>
+          <div id="bulb"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 9 -->
+  <script src="./assets/page9.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
