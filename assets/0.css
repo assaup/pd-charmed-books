@@ -1,0 +1,118 @@
+/* ==========================================================================
+   0.css — сцена страницы 0 «Пролог».
+   Портрет героя (portrait.png) неподвижен, три слоя «осколков кода»
+   (blocks-1/2/3.png) зациклено сменяют друг друга через прозрачность —
+   отсюда ощущение мерцающих, будто движущихся блоков данных.
+   Плюс — стили кнопки «Удалить», переключения текста по клику
+   и врезки-вопроса .quiz.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#portrait {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+#overflow-wrapper {
+  width: 100%;
+}
+
+.scene__blocks {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  opacity: 0;
+  mix-blend-mode: screen;
+  animation: blocks-cycle 9s ease-in-out infinite;
+}
+
+#blocks-1 { animation-delay: 0s; }
+#blocks-2 { animation-delay: -3s; }
+#blocks-3 { animation-delay: -6s; }
+
+/* Один слой на трети цикла: проявился, подержался, погас, пока
+   следующий не подхватит — отсюда ощущение непрерывного движения */
+@keyframes blocks-cycle {
+  0%    { opacity: 0;   transform: scale(0.98) translateY(1.5%); }
+  8%    { opacity: 1;   transform: scale(1)    translateY(0); }
+  25%   { opacity: 1;   transform: scale(1)    translateY(0); }
+  33%   { opacity: 0;   transform: scale(1.02) translateY(-1.5%); }
+  100%  { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene__blocks {
+    animation: none;
+  }
+  #blocks-1 { opacity: 1; }
+}
+
+/* ---------- Текст: подзаголовок сцены ---------- */
+
+#textbox .scene-location {
+  margin-bottom: 20px;
+  font-style: italic;
+  font-size: calc(13px + 3 * ((100vw - 767px) / (1920 - 767)));
+  opacity: 0.7;
+}
+
+/* ---------- Текст: кнопка «Удалить» ---------- */
+
+.delete-button {
+  display: block;
+  margin: 8px auto 32px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(79, 177, 196, 0.6);
+  border-radius: 4px;
+  color: rgba(79, 177, 196, 1);
+  font-family: "Montserrat Alternates", Arial, sans-serif;
+  font-size: calc(14px + 4 * ((100vw - 767px) / (1920 - 767)));
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.delete-button:hover,
+.delete-button:focus-visible {
+  background: rgba(79, 177, 196, 0.15);
+}
+.delete-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+  background: transparent;
+}
+
+/* ---------- Текст: врезка-вопрос ---------- */
+
+#textbox .quiz {
+  margin: 24px 0;
+  opacity: 0.75;
+}
+#textbox .quiz p {
+  font-style: italic;
+  font-size: calc(13px + 3 * ((100vw - 767px) / (1920 - 767)));
+  margin: 0 0 6px;
+}
+
+/* ---------- Плавная смена текста по кнопке (класс ставит page0.js) ---------- */
+
+#prologue-before,
+#prologue-after {
+  transition: opacity 0.6s ease;
+}
+#prologue-before.is-hiding {
+  opacity: 0;
+}
+#prologue-after {
+  opacity: 0;
+}
+#prologue-after.is-showing {
+  opacity: 1;
+}
+#prologue-after[hidden] {
+  display: none;
+}

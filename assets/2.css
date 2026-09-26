@@ -1,0 +1,114 @@
+/* ==========================================================================
+   2.css — сцена страницы 2 «Кресло».
+   bg.png — цельная иллюстрация (программист под лампой, за стеклом силуэт
+   директора). Поверх — beam.png (луч лампы) и sparks.png (электрические
+   разряды): оба тихо дышат/потрескивают на протяжении сцены и заметно
+   усиливаются в её кульминации — извлечении и обрыве связи.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Луч лампы: над лежащим в кресле, screen — только добавляет свет.
+   Не ровное дыхание, а мигание — лампа слегка "барахлит" */
+#beam {
+  left: 28%;
+  top: -6%;
+  width: 46%;
+  z-index: 3;
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  animation: beam-flicker 5s ease-in-out infinite;
+}
+
+/* Искры: у кресла и проводки, screen — тоже только добавляет свет */
+#sparks {
+  left: 46%;
+  top: 40%;
+  width: 34%;
+  z-index: 4;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: sparks-flicker 4.4s linear infinite;
+}
+
+/* Неравномерные вспышки-провалы вместо ровного дыхания — как у лампы
+   на честном слове держащегося контакта */
+@keyframes beam-flicker {
+  0%   { opacity: 0.30; }
+  4%   { opacity: 0.12; }
+  5%   { opacity: 0.34; }
+  9%   { opacity: 0.16; }
+  11%  { opacity: 0.36; }
+  15%  { opacity: 0.20; }
+  16%  { opacity: 0.38; }
+  30%  { opacity: 0.22; }
+  32%  { opacity: 0.42; }
+  47%  { opacity: 0.18; }
+  49%  { opacity: 0.36; }
+  63%  { opacity: 0.14; }
+  65%  { opacity: 0.32; }
+  80%  { opacity: 0.20; }
+  82%  { opacity: 0.30; }
+  100% { opacity: 0.30; }
+}
+
+/* Неровное потрескивание: пара коротких вспышек за цикл, не метроном */
+@keyframes sparks-flicker {
+  0%   { opacity: 0; }
+  4%   { opacity: 0.8; }
+  7%   { opacity: 0.1; }
+  10%  { opacity: 0.6; }
+  14%  { opacity: 0; }
+  55%  { opacity: 0; }
+  58%  { opacity: 0.9; }
+  60%  { opacity: 0.05; }
+  64%  { opacity: 0.5; }
+  68%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #beam,
+  #sparks {
+    animation: none;
+  }
+  #beam { opacity: 0.3; }
+  #sparks { opacity: 0; }
+}
+
+/* ---------- Текст: врезка-вопрос ---------- */
+
+#textbox .quiz {
+  margin: 24px 0;
+  opacity: 0.75;
+}
+#textbox .quiz p {
+  font-style: italic;
+  font-size: calc(13px + 3 * ((100vw - 767px) / (1920 - 767)));
+  margin: 0 0 6px;
+}
+
+/* ---------- Текст: системное сообщение CYPHERIA ---------- */
+
+#textbox .system-message {
+  margin: 28px 0;
+  padding: 16px 20px;
+  border-left: 2px solid rgba(79, 177, 196, 0.6);
+}
+#textbox .system-message p {
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgba(79, 177, 196, 1);
+  margin: 0 0 6px;
+}
+#textbox .system-message p:last-child {
+  margin-bottom: 0;
+}
