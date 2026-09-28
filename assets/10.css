@@ -1,0 +1,52 @@
+/* ==========================================================================
+   N.css — сцена страницы N «Кухня, разговор при мигающей лампе».
+   Только позиции/размеры/внешний вид слоёв (% от #scene, по макету).
+   Само мигание/дыхание — в pageN.js.
+   ========================================================================== */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ---------- Cвет экрана ---------- */
+/* Эллипс примерно по размеру телефона на картинке*/
+#screen-glow {
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  width: 50%;
+  height: 65%;
+  transform: rotate(165deg);
+  background: radial-gradient(closest-side,
+      rgba(168, 199, 236, 0.7) 0%,
+      rgba(166,193,233, 0.3) 45%,
+      rgba(190, 230, 255, 0) 80%);
+  mix-blend-mode: screen;
+  opacity: 0.6; /* стартовое значение*/
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity;
+
+}
+
+/* ---------- Вибрация телефона ---------- */
+#buzz {
+  position: absolute;
+  left: 34%;
+  top: 7%;
+  width: 15%;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(23deg);
+}
+
+.buzz-line {
+  fill:none;
+  will-change: opacity;
+  stroke: rgb(113, 189, 213);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
