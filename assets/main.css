@@ -4,6 +4,28 @@
    Стили элементов конкретной сцены — только в N.css.
    ========================================================================== */
 
+/* ---------- 0. Переменные (цвета) ---------- */
+:root {
+  /* Фон */
+  --color-bg: rgba(11, 8, 36, 1);          /* тёмно-синий фон книги */
+
+  /* Текст */
+  --color-text: rgba(255, 255, 255, 1);    /* основной белый текст */
+  --color-text-dark: #000;                 /* тёмный текст (fallback #notify) */
+
+  /* Уведомление */
+  --color-notify-bg: rgba(229, 229, 236, 0.5);
+
+  /* Скроллбар */
+  --color-scrollbar-track: rgba(255, 255, 255, 0.1);
+  --color-scrollbar-thumb: rgba(255, 255, 255, 0.3);
+  --color-scrollbar-thumb-hover: rgba(255, 255, 255, 0.5);
+
+  /* Лоадер */
+  --color-loader-bg: #333333;
+  --color-loader-ring: #cccccc;
+}
+
 /* ---------- 1. Normalize (сокращённый) ---------- */
 html {
   line-height: 1.15;
@@ -154,7 +176,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgba(11, 8, 36, 1);
+  background: var(--color-bg);
   overflow: hidden;
   font-family: "Montserrat Alternates", Arial, sans-serif;
 }
@@ -164,10 +186,10 @@ body {
   top: 0;
   right: 0;
   z-index: 5;
-  color: var(--bk-text, #000);
+  color: var(--bk-text, var(--color-text-dark));
   font-family: "Golos", sans-serif;
   line-height: 120%;
-  background: rgba(229, 229, 236, 0.5);
+  background: var(--color-notify-bg);
   pointer-events: none;
 }
 
@@ -199,14 +221,14 @@ main::-webkit-scrollbar {
   width: 8px;
 }
 #content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-scrollbar-track);
 }
 #content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--color-scrollbar-thumb);
   border-radius: 4px;
 }
 #content::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-scrollbar-thumb-hover);
 }
 
 #textbox {
@@ -214,7 +236,7 @@ main::-webkit-scrollbar {
   flex-direction: column;
   align-items: center;
   padding: calc(40px + 56 * ((100vw - 767px) / (1920 - 767)));
-  background-color: rgba(11, 8, 36, 1)
+  background-color: var(--color-bg)
 }
 #textbox h1 {
   margin-bottom: 30px;
@@ -223,7 +245,7 @@ main::-webkit-scrollbar {
   line-height: 100%;
   letter-spacing: -1px;
   text-align: center;
-  color: rgba(79, 177, 196, 1);
+  color: var(--color-text);
 }
 #textbox .content-item {
   margin-bottom: 20px;
@@ -234,12 +256,12 @@ main::-webkit-scrollbar {
   margin: 0 0 15px;
   font-size: calc(20px + 8 * ((100vw - 767px) / (1920 - 767)));
   font-weight: 700;
-  color: rgba(79, 177, 196, 1);
+  color: var(--color-text);
 }
 #textbox p {
   font-size: calc(14px + 8 * ((100vw - 767px) / (1920 - 767)));
   line-height: 1.6;
-  color: rgba(79, 177, 196, 1);
+  color: var(--color-text);
 
 
   -webkit-hyphens: auto;
@@ -264,6 +286,25 @@ main::-webkit-scrollbar {
   hyphenate-limit-lines: 2;
   hyphenate-limit-last: always;
   hyphenate-limit-zone: 8%;
+}
+#textbox .quiz ul {
+  margin: 0;
+  padding-left: 0;         /* стандартный отступ списка */
+  list-style: none;            /* маркер — буквы А/Б/В в тексте пункта */
+}
+#textbox .quiz h2 {
+  margin: 0 0 12px;
+  font-size: calc(14px + 4 * ((100vw - 767px) / (1920 - 767)));
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+#textbox .quiz li {
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0 0 6px;
 }
 
 #undertext {
@@ -304,7 +345,7 @@ main::-webkit-scrollbar {
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: #333333;
+  background-color: var(--color-loader-bg);
 }
 .lds-ring {
   position: relative;
@@ -319,9 +360,9 @@ main::-webkit-scrollbar {
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #cccccc;
+  border: 8px solid var(--color-loader-ring);
   border-radius: 50%;
-  border-color: #cccccc transparent transparent transparent;
+  border-color: var(--color-loader-ring) transparent transparent transparent;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 .lds-ring div:nth-child(1) { animation-delay: -0.45s; }
