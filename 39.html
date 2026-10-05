@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шепот кода — страница 39</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 39.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/39.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <main>
+    <section id="content">
+      <div id="textbox">
+
+        <p>Система начинает самоуничтожение. Здание сотрясается. Майк и Даяна бегут к выходу.</p>
+
+        <p>Их преследуют охранники. Майк жертвует собой, заперев себя за стеклянной дверью, чтобы дать Даяне уйти.</p>
+
+        <p>Даяна выбирается из здания, теряет сознание. Её спасает Дэвид.</p>
+
+      </div>
+    </section>
+
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-39/39.jpg"
+          alt="Даяна бежит по тёмному коридору, за ней гонятся охранники">
+
+        <div id="alarm" aria-hidden="true"></div>
+        <div id="lights" aria-hidden="true"></div>
+        <div id="beams" aria-hidden="true">
+          <div id="beam-a" class="beam"></div>
+          <div id="beam-b" class="beam"></div>
+        </div>
+        <div id="dust" aria-hidden="true">
+          <div id="dust-strip"></div>
+        </div>
+        <div id="dim" aria-hidden="true"></div>
+        <div id="vignette" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="./assets/page39.js"></script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
