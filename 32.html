@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 32</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 32.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/32.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 32</p>
+        <h1>ГЛАВА 17. В логове зверя</h1>
+        <div class="content-item">
+          <h3>133.  ТЕРРИТОРИЯ SPEKTRA - УТРО</h3>
+          <p>Даяна и Майк подъезжают к футуристическому кампусу корпорации.</p>
+        </div>
+        <div class="content-item">
+          <h3>134.  ШТАБ-КВАРТИРА SPEKTRA - УТРО</h3>
+          <p>Они проходят строжайший контроль: сканирование лица, сетчатки, отпечатков. Даяна получает гостевую карту.</p>
+          <p>135. Майк проводит её в свой кабинет. Он по-прежнему сомневается, и предлагает Даяне пока просто осмотреться, выпить кофе, вместо того чтобы запускать вирус.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — цельная иллюстрация + линия сканера по портрету.
+         Вся анимация — CSS-keyframes в 32.css, page32.js только
+         запускает её после загрузки.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-32/bg.png" alt="Интерфейс сканера SPEKTRA с портретом Даяны">
+
+        <!-- Окно портрета: внутри бежит линия сканера -->
+        <div id="scan" aria-hidden="true">
+          <div id="scan-flash"></div>
+          <div id="scan-line"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 32 -->
+  <script src="./assets/page32.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
