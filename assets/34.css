@@ -1,0 +1,99 @@
+/* ==========================================================================
+   34.css — сцена страницы 34 «Выбор сделан».
+   Сцена — одна цельная картинка. Поверх:
+     #ecg        — SVG-кардиограмма над телефоном: по нарисованной линии
+                   пробегает яркий импульс, как на мониторе сердца;
+     #headphones — наушники вспыхивают в такт «удару сердца».
+   Ритм общий: цикл 1.6 с, удар в начале цикла.
+   Анимация целиком на CSS; page34.js только добавляет класс .is-running.
+   Координаты — в % от #scene.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Наушники. Центр — 35.5% 42.5% (амбушюра на bg.png) */
+#headphones {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(4.5% 4.5% at 35.5% 42.5%,
+      rgba(190, 250, 255, 0.95) 0%,
+      rgba(100, 220, 240, 0.45) 45%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+#ecg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  overflow: visible;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Импульс: штрих длиной 18% линии бежит слева направо.
+   dashoffset 18 — штрих ещё перед началом, -100 — уже за концом */
+#ecg-trace {
+  fill: none;
+  stroke: rgb(220, 255, 255);
+  stroke-width: 0.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 18 100;
+  stroke-dashoffset: 18;
+  filter: url(#ecg-glow);
+  opacity: 0;
+}
+
+/* ---------- Анимация ---------- */
+
+.is-running #ecg-trace {
+  animation: ecg-run 1.6s linear infinite;
+}
+
+.is-running #headphones {
+  animation: heartbeat 1.6s ease-out infinite;
+}
+
+/* Импульс пробегает линию за первые 55% цикла, остальное — пауза */
+@keyframes ecg-run {
+  0%   { stroke-dashoffset: 18;   opacity: 1; }
+  55%  { stroke-dashoffset: -100; opacity: 1; }
+  56%  { opacity: 0; }
+  100% { stroke-dashoffset: -100; opacity: 0; }
+}
+
+/* Двойной удар «тук-тук», как у настоящего пульса */
+@keyframes heartbeat {
+  0%   { opacity: 0.2; }
+  8%   { opacity: 0.9; }
+  16%  { opacity: 0.35; }
+  24%  { opacity: 0.75; }
+  45%  { opacity: 0.2; }
+  100% { opacity: 0.2; }
+}
+
+/* Уменьшение анимации в системе — всё стоит */
+@media (prefers-reduced-motion: reduce) {
+  .is-running #ecg-trace,
+  .is-running #headphones {
+    animation: none;
+  }
+}

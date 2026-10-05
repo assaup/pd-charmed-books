@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 34</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 34.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/34.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 34</p>
+        <h1>ГЛАВА 19. Выбор сделан</h1>
+        <div class="content-item">
+          <p>145. Вернулись домой. Даяна уснула от усталости. Утром Майк уходит на работу, Даяна злится и кричит, решает выйти на улицу. Размышляет пока ходит. Звонит агенту с одноразового телефона, договаривается о встрече.</p>
+          <p>146. В машине происходит разговор с Дэвидом, где Даяна окончательно принимает решение. Она понимает, что должна спасти брата любой ценой. Дэвид даёт ей свой личный, защищенный телефон, чтобы она могла поговорить с Сайферием наедине и попрощаться.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — цельная иллюстрация + «сердцебиение» над телефоном
+         и пульсирующие наушники. Вся анимация — CSS-keyframes в 34.css,
+         page34.js только запускает её после загрузки.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-34/bg.png" alt="Даяна в наушниках читает на скамейке в ночном парке">
+
+        <!-- Свечение наушников: CSS-градиент -->
+        <div id="headphones" aria-hidden="true"></div>
+
+        <!-- Кардиограмма над телефоном. Точки path сняты с нарисованной линии,
+             viewBox 0 0 100 100 = проценты сцены, pathLength="100" — для анимации -->
+        <svg id="ecg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="ecg-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="0.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path id="ecg-trace" pathLength="100" d="M29.1 90.2 L29.7 92.5 L30.1 93.8 L30.6 90.5 L31.9 83.5 L32.2 83 L32.8 90.5 L33.4 94 L33.8 94.3 L34.4 90.5 L34.8 89.3 L35.3 91 L35.6 91.3 L40.4 91.8"/>
+        </svg>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 34 -->
+  <script src="./assets/page34.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
