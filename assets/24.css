@@ -1,0 +1,140 @@
+/* ==========================================================================
+   24.css — сцена страницы 24 «Трёхсторонний звонок, мир рушится».
+   Сцена — одна цельная картинка, кадр делит нарисованная неоновая линия.
+   Поверх:
+     #half-a / #half-b — две копии картинки, обрезанные по линии; во время
+                         глитча разъезжаются в стороны («трещина»);
+     #crack-gap        — тёмная щель, видна между разъехавшимися половинами;
+     .phone-glow       — вспышки телефонов Даяны и парня;
+     #signal           — SVG: светящаяся линия и бегущие по ней импульсы.
+   Координаты — в % от #scene. Линия на bg.png — точки path в 24.html,
+   они же в clip-path ниже: менять вместе.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* ---------- Трещина ---------- */
+
+#crack-gap {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgb(6, 4, 22);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Обёртка несёт сдвиг и цветной ореол (filter), картинка внутри — обрезку.
+   Порознь, потому что filter применяется до clip-path и ореол обрезался бы */
+.half {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.half img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: block;
+  -webkit-user-drag: none;
+}
+
+/* Сторона Даяны — справа сверху от линии */
+#half-a img {
+  clip-path: polygon(6.8% 0, 61% 52%, 64% 62.5%, 77% 72.9%, 80.3% 79.2%,
+      86.5% 83.3%, 90.7% 85.4%, 97.8% 87.5%, 100% 88%, 100% 0);
+}
+
+/* Сторона парня — слева снизу от линии */
+#half-b img {
+  clip-path: polygon(6.8% 0, 61% 52%, 64% 62.5%, 77% 72.9%, 80.3% 79.2%,
+      86.5% 83.3%, 90.7% 85.4%, 97.8% 87.5%, 100% 88%, 100% 100%, 0 100%, 0 0);
+}
+
+/* Глитч: каналы «разъезжаются» — розовый в одну сторону, бирюзовый в другую */
+#half-a {
+  filter: drop-shadow(0.4vmin -0.4vmin 0 rgba(255, 70, 170, 0.75));
+}
+
+#half-b {
+  filter: drop-shadow(-0.4vmin 0.4vmin 0 rgba(70, 240, 255, 0.75));
+}
+
+/* ---------- Телефоны ---------- */
+
+.phone-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#phone-dayana {
+  background: radial-gradient(9% 11% at 62% 11%,
+      rgba(200, 250, 255, 0.9) 0%,
+      rgba(110, 220, 240, 0.4) 45%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+#phone-mike {
+  background: radial-gradient(9% 10% at 36% 61%,
+      rgba(200, 250, 255, 0.9) 0%,
+      rgba(110, 220, 240, 0.4) 45%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+/* ---------- Линия и импульсы ---------- */
+
+#signal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  overflow: visible;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+#signal path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#neon);
+}
+
+/* Подсветка нарисованной линии — «дышит» яркостью */
+#line-glow {
+  stroke: rgb(120, 235, 245);
+  stroke-width: 0.5;
+  opacity: 0;
+}
+
+/* Импульс: короткий штрих. Длина линии = 100 (pathLength),
+   dasharray «5 100» — штрих длиной 5% линии, дальше пусто */
+.pulse {
+  stroke: rgb(230, 255, 255);
+  stroke-width: 0.9;
+  stroke-dasharray: 5 100;
+  stroke-dashoffset: 5;
+  opacity: 0;
+}
