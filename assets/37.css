@@ -1,0 +1,31 @@
+/* ==========================================================================
+   37.css — сцена страницы 37 «Цифровая битва».
+   Сцена — одна цельная иллюстрация, без анимации.
+   Внизу — стили кликабельных вариантов квиза (скрипт — assets/quiz.js).
+   ========================================================================== */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* ---------- Квиз: варианты кликабельны ---------- */
+
+#textbox .quiz li {
+  cursor: pointer;
+  padding: 2px 8px;
+  margin-left: -8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+#textbox .quiz li:hover,
+#textbox .quiz li:focus-visible {
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+#textbox .quiz li.is-selected {
+  background-color: rgba(79, 177, 196, 0.22);
+  box-shadow: inset 2px 0 0 rgba(79, 177, 196, 1);
+}
