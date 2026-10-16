@@ -24,6 +24,24 @@ document.addEventListener("DOMContentLoaded", function () {
         image: "page-11-3",
         insertAfter: 11,
       },
+      {
+        filename: "15_1.html",
+        label: "11.1",
+        image: "page-11-1",
+        insertAfter: 15,
+      },
+      {
+        filename: "15_2.html",
+        label: "15.2",
+        image: "page-15-2",
+        insertAfter: 15,
+      },
+      {
+        filename: "15_3.html",
+        label: "15.3",
+        image: "page-15-3",
+        insertAfter: 15,
+      },
     ],
     // тут страницы с нестандартными переходами
     customNavigation: {

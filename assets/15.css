@@ -1,0 +1,124 @@
+.scene__img {
+  width: 100%;
+  height: 100%;
+
+}
+
+.dust-container {
+    position: absolute;
+    width: 60%;
+    height: 80%;
+    inset: 0;
+    background: none;
+    overflow: hidden;
+}
+
+#dust {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.glitch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.glitch-one {
+    animation: glitch-one 10s infinite;
+}
+
+/* Свет за окном */
+.scene-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        270deg,
+        rgba(57, 218, 255, 0.025) 80%,
+        rgba(57, 218, 255, 0.15) 85%,
+        rgba(57, 218, 255, 0.04) 100%
+    );
+    mix-blend-mode: screen;
+    animation: window-pulse 10s ease-in-out infinite;
+}
+
+@keyframes window-pulse {
+    0% { opacity: 0}
+    20% { opacity: 0.6}
+    50% { opacity: 1}
+    60% { opacity: 0.4}
+    80% { opacity: 0.8}
+    100% { opacity: 0}
+
+}
+
+/* Отдельный фрагмент изображения смещается */
+@keyframes glitch-one {
+    0%, 20%, 22%, 48%, 50%, 78%, 80%, 100% {
+        opacity: 0;
+        clip-path: inset(0 0 100% 0);
+        transform: translateX(0);
+    }
+
+    /* Первый сбой */
+    20.2% {
+        opacity: 0.9;
+        clip-path: inset(41% 0 48% 0);
+        transform: translateX(-20px);
+    }
+
+    20.7% {
+        opacity: 0.8;
+        clip-path: inset(41% 0 48% 0);
+        transform: translateX(18px);
+    }
+
+    21.2% {
+        opacity: 0.7;
+        clip-path: inset(41% 0 48% 0);
+        transform: translateX(-10px);
+    }
+
+    22% {
+        opacity: 0;
+    }
+
+    /* Второй сбой */
+    48.2% {
+        opacity: 0.9;
+        clip-path: inset(76% 0 18% 0);
+        transform: translateX(18px);
+    }
+
+    48.8% {
+        opacity: 0.8;
+        clip-path: inset(76% 0 18% 0);
+        transform: translateX(-20px);
+    }
+
+    49.3% {
+        opacity: 0.7;
+        clip-path: inset(76% 0 18% 0);
+        transform: translateX(12px);
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scene-base,
+    .glitch,
+    .particle,
+    .scene-glow {
+        animation: none;
+    }
+}
