@@ -1,0 +1,212 @@
+.scene__img {
+  width: 100%;
+  height: 100%;
+
+}
+
+.scene__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+  background: rgba(163, 240, 255, 0.75);
+  box-shadow: 0 0 7px rgba(92, 221, 255, 0.55);
+
+  opacity: 0;
+
+  animation: scene-particle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.particle--1 {
+  left: 18%;
+  top: 56%;
+  --duration: 11s;
+  --delay: -3s;
+}
+
+.particle--2 {
+  left: 16%;
+  top: 39%;
+  --duration: 13s;
+  --delay: -7s;
+}
+
+.particle--3 {
+  left: 75%;
+  top: 61%;
+  --duration: 10s;
+  --delay: -5s;
+}
+
+.particle--4 {
+  left: 31%;
+  top: 27%;
+  --duration: 14s;
+  --delay: -9s;
+}
+
+.particle--5 {
+  left: 57%;
+  top: 70%;
+  --duration: 12s;
+  --delay: -4s;
+}
+
+.particle--6 {
+  left: 21%;
+  top: 41%;
+  --duration: 12s;
+  --delay: -8s;
+}
+
+.particle--7 {
+  left: 88%;
+  top: 57%;
+  --duration: 8s;
+  --delay: -9s;
+}
+
+.particle--5 {
+  left: 67%;
+  top: 25%;
+  --duration: 12s;
+  --delay: -4s;
+}
+
+.lamp-glow{
+  position: absolute;
+  top:0;
+  left:15%;
+  width: 30%;
+  height: 80%;
+  transform: rotate(166deg);
+  filter: blur(10px);
+  background: radial-gradient(ellipse,rgba(163, 240, 255, 0.75), rgba(92, 221, 255, 0.15), rgba(92, 221, 255, 0));
+  animation: lamp-pulse 10s ease-in-out infinite;
+}
+
+.steam__wrapper {
+  height: 10%;
+  width: 10%;
+  top: 52%;
+  left:39%;
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.steam {  
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  transform: translateY(-50%) scale(0.25);
+  filter: blur(5px);
+  animation: steam-animation var(--time) infinite;
+  animation-delay: 1s;
+}
+
+.steam--1{
+  height: 100%;
+  width: 100%;
+  --time: 4s;
+}
+
+.steam--2{
+  height: 60%;
+  width: 60%;
+  --time: 4s;
+}
+
+.steam--3{
+  height: 80%;
+  width: 80%;
+  --time: 4s;
+}
+
+.steam--4{
+  height: 80%;
+  width: 90%;
+  --time: 4s;
+}
+
+.steam--5{
+  height: 90%;
+  width:  90%;
+  --time: 2s;
+}
+
+.steam--6{
+  height: 90%;
+  width: 90%;
+  --time: 3s;
+}
+
+@keyframes steam-animation {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.25);
+    opacity: 0.1;
+  }
+  15% {
+    transform: translateY(2) translateX(2) scale(0.25);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-80%) translateX(-2%) scale(1);
+    opacity: 0;
+  }
+}
+
+
+@keyframes scene-particle {
+  0% {
+    transform: translate3d(0, 8px, 0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  70% {
+    opacity: 0.18;
+  }
+
+  100% {
+    transform: translate3d(12px, -35px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes lamp-pulse {
+    0% { opacity: 0}
+    20% { opacity: 0.4}
+    50% { opacity: 0.8}
+    60% { opacity: 0.3}
+    80% { opacity: 0.6}
+    100% { opacity: 0}
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .scene-base,
+    .glitch,
+    .particle,
+    .scene-glow {
+        animation: none;
+    }
+}
