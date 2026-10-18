@@ -1,0 +1,263 @@
+/* Координаты — в % от картинки 1920×1920 */
+
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Мир: всё, что двигается вместе с камерой */
+#world {
+  position: absolute;
+  inset: 0;
+  transform-origin: 49.6% 68%;
+  will-change: transform;
+}
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Огни города */
+#city {
+  position: absolute;
+  left: 40.625%;
+  top: 32.292%;
+  width: 17.969%;
+  height: 32.813%;
+  z-index: 2;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 3px rgba(255, 150, 230, 0.8));
+  pointer-events: none;
+}
+
+#city img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: twinkle 2.6s ease-in-out infinite alternate;
+}
+
+#city img:nth-child(2) { animation-duration: 3.4s; animation-delay: -1.2s; }
+#city img:nth-child(3) { animation-duration: 1.9s; animation-delay: -0.5s; }
+
+@keyframes twinkle {
+  0%, 35% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Тень неисправного фонаря: при opacity 1 он погашен */
+#shade-r2 {
+  position: absolute;
+  left: 60.208%;
+  top: 41.719%;
+  width: 11.562%;
+  height: 32.083%;
+  z-index: 3;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ореол плафона, квадрат вокруг лампы */
+.glow {
+  position: absolute;
+  z-index: 4;
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+      rgba(200, 250, 255, 0.95) 0%,
+      rgba(90, 215, 255, 0.45) 30%,
+      rgba(60, 160, 255, 0.12) 65%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+#glow-l1 { left: 0.833%;  top: 10.000%; width: 31.250%; height: 31.250%; }
+#glow-l2 { left: 23.021%; top: 35.521%; width: 19.792%; height: 19.792%; }
+#glow-l3 { left: 34.635%; top: 48.073%; width: 11.458%; height: 11.458%; }
+#glow-r1 { left: 66.458%; top: 9.271%;  width: 31.250%; height: 31.250%; }
+#glow-r2 { left: 55.833%; top: 35.521%; width: 19.792%; height: 19.792%; }
+#glow-r3 { left: 52.604%; top: 48.177%; width: 11.458%; height: 11.458%; }
+
+/* Девушка: контейнер на весь кадр, origin — её ступни */
+#walk {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  transform-origin: 49.583% 76.094%;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.figure {
+  position: absolute;
+  left: 46.875%;
+  top: 62.292%;
+  width: 5.417%;
+  height: 13.802%;
+}
+
+.figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.leg {
+  will-change: transform;
+}
+
+/* Отражение: переворот вокруг линии ступней */
+.figure--mirror {
+  transform-origin: 50% 100%;
+  transform: scaleY(-1);
+  opacity: 0.3;
+  filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 55%);
+  mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 55%);
+}
+
+/* Вязкий туман у земли */
+#fog {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(40% 22% at 50% 88%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(40% 22% at 50% 88%, #000 30%, transparent 100%);
+}
+
+/* Лента в два окна: сдвиг на 50% — бесшовный цикл; пятна не выходят за край окна */
+.fog-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  will-change: transform;
+}
+
+#fog-a {
+  background-image:
+    radial-gradient(16% 4% at 18% 76%, rgba(200, 190, 255, 0.85), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(18% 5% at 50% 80%, rgba(180, 210, 255, 0.80), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(15% 3.5% at 82% 75%, rgba(210, 190, 255, 0.85), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(22% 7% at 30% 92%, rgba(180, 180, 255, 0.70), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(20% 6% at 75% 90%, rgba(190, 200, 255, 0.75), rgba(0, 0, 0, 0) 100%);
+  animation: fog-drift 70s linear infinite;
+}
+
+#fog-b {
+  background-image:
+    radial-gradient(18% 3% at 22% 73%, rgba(170, 225, 255, 0.75), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(14% 3% at 55% 77%, rgba(215, 195, 255, 0.80), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(16% 5% at 82% 74%, rgba(180, 205, 255, 0.75), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(24% 8% at 50% 88%, rgba(195, 180, 255, 0.65), rgba(0, 0, 0, 0) 100%);
+  animation: fog-drift 46s linear infinite reverse;
+}
+
+@keyframes fog-drift {
+  to { transform: translateX(-50%); }
+}
+
+/* Лепестки жасмина: сдвиг ленты считает page42.js */
+#petals {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.petal-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  will-change: transform;
+}
+
+#petals-far {
+  opacity: 0.6;
+  background-image:
+    radial-gradient(0.51% 0.27% at 6% 38%, rgba(240, 245, 255, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.42% 0.24% at 17% 55%, rgba(255, 240, 250, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.51% 0.31% at 29% 31%, rgba(235, 250, 255, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.37% 0.20% at 41% 62%, rgba(255, 245, 240, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.48% 0.26% at 52% 44%, rgba(240, 245, 255, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.41% 0.24% at 64% 58%, rgba(255, 240, 250, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.51% 0.27% at 73% 35%, rgba(235, 250, 255, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.37% 0.22% at 85% 66%, rgba(255, 245, 240, 0.95), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.44% 0.26% at 94% 48%, rgba(240, 245, 255, 0.95), rgba(0, 0, 0, 0) 100%);
+}
+
+#petals-near {
+  filter: drop-shadow(0 0 4px rgba(170, 235, 255, 0.8));
+  background-image:
+    radial-gradient(1.02% 0.51% at 3% 24%, rgba(255, 252, 245, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.85% 0.44% at 14% 71%, rgba(250, 245, 255, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(1.19% 0.58% at 26% 47%, rgba(255, 250, 240, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.77% 0.41% at 37% 83%, rgba(245, 250, 255, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(1.02% 0.51% at 48% 19%, rgba(255, 245, 250, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.94% 0.48% at 59% 64%, rgba(255, 252, 245, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(1.10% 0.54% at 71% 39%, rgba(250, 245, 255, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(0.85% 0.42% at 82% 88%, rgba(255, 250, 240, 1), rgba(0, 0, 0, 0) 100%),
+    radial-gradient(1.02% 0.51% at 92% 56%, rgba(245, 250, 255, 1), rgba(0, 0, 0, 0) 100%);
+}
+
+/* Злость пульсирует по краям кадра */
+#rage {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: radial-gradient(70% 70% at 50% 60%,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(200, 20, 110, 0.55) 85%,
+      rgba(230, 30, 90, 0.85) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 21;
+  background: radial-gradient(66% 66% at 50% 62%,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(8, 4, 30, 0.55) 80%,
+      rgba(8, 4, 30, 0.90) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#blackout {
+  position: absolute;
+  inset: 0;
+  z-index: 22;
+  background: rgb(6, 3, 20);
+  opacity: 1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #city img,
+  .fog-strip {
+    animation: none;
+  }
+}
