@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шепот кода — страница 42</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 42.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/42.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Блок вопроса —
+         <div class="quiz"><h2>…</h2><ul><li>…</li></ul></div>.
+         Дублировать для мобильных НЕ нужно: раскладка перестраивается
+         в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Я бросилась прочь из дома, жаждая как можно скорее покинуть эти проклятые стены, этот склеп травмированного разума. Дом детства, слова матери — всё это разорвало раны, затянувшиеся тонкой коркой времени.</p>
+
+        <p>До последнего я надеялась: она поймёт. Услышит меня. Сделает шаг навстречу.</p>
+
+        <p>Но чудес не бывает.</p>
+
+        <p>Мир по‑прежнему жил по законам жестоких алгоритмов. Человечность давно была стёрта с лица Вселенной — задолго до появления Сингера.</p>
+
+        <p>Тёплый калифорнийский ветер ударил в лицо, словно насмешка реальности: природа продолжала жить своей размеренной жизнью, пока внутри меня бушевал ураган. Воздух, напоённый ароматами цветущих жасминов и нагретого асфальта, казался издевательски свежим — он будто требовал дышать, жить, чувствовать, когда всё, что осталось во мне, — это зияющая пустота.</p>
+
+        <p>Меня разрывало изнутри. Обреченность тяжёлым свинцом оседала в груди, злость пульсировала в висках, обида разъедала душу, как кислота. Эти чувства сплетались в яростный коктейль, от которого кружилась голова и дрожали пальцы. Тело горело — не от жара, а от внутреннего пламени, пожирающего последние остатки сил. Каждая клеточка дрожала: не только плоть, но и душа содрогалась в беззвучном крике.</p>
+
+        <p>Майк... Мой брат... Моя единственная семья.</p>
+
+        <p>Слова матери всё ещё звенели в ушах, врезаясь в сознание острыми осколками: «Мы не будем касаться дел Майкла...» Она отказалась от него так легко, будто стирала ненужный файл. Будто Майк — не её сын, не человек с живой душой, а ошибка в коде, которую нужно устранить ради «чистоты системы».</p>
+
+        <p>И я поняла: мы никогда не были частью её новой жизни. Мы — пустые аватары, цифровые тени, случайно залетевшие в её идеально выстроенный мир. Ненужные файлы, которые безжалостно стёр её личный антивирус — Пол. Тот, кто занял место отца, кто стал символом её «счастливого финала». А я... Я осталась одна. Совершенно одна в этом жестоком, беспощадном мире, где эмоции давно стали устаревшей функцией.</p>
+
+        <p>Я брела по тротуарам пустынной улицы. Шаги получались медленными, шаркающими, будто ноги отказывались подчиняться. Каждый шаг требовал невероятных усилий — словно я пробиралась сквозь вязкий туман, который цеплялся за лодыжки, замедлял движение, пытался утянуть вниз.</p>
+
+      </div>
+    </section>
+
+    <!-- Сцена: чистый фон + отдельные слои (42.css, page42.js) -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <div id="world">
+          <img class="scene__img" id="bg" src="./assets/img/page-42/42.png" alt="Ночная улица с фонарями, по тротуару вдаль идёт девушка в наушниках">
+
+          <!-- Огни города: три группы мерцают вразнобой -->
+          <div id="city" aria-hidden="true">
+            <img src="./assets/img/page-42/city-1.png" alt="">
+            <img src="./assets/img/page-42/city-2.png" alt="">
+            <img src="./assets/img/page-42/city-3.png" alt="">
+          </div>
+
+          <!-- Фонари: ореолы; тень гасит неисправный фонарь -->
+          <img id="shade-r2" src="./assets/img/page-42/shade-r2.png" alt="" aria-hidden="true">
+          <div class="glow" id="glow-l1" aria-hidden="true"></div>
+          <div class="glow" id="glow-l2" aria-hidden="true"></div>
+          <div class="glow" id="glow-l3" aria-hidden="true"></div>
+          <div class="glow" id="glow-r1" aria-hidden="true"></div>
+          <div class="glow" id="glow-r2" aria-hidden="true"></div>
+          <div class="glow" id="glow-r3" aria-hidden="true"></div>
+
+          <!-- Девушка: тело и ноги отдельно, ниже — отражение -->
+          <div id="walk" aria-hidden="true">
+            <div class="figure">
+              <img class="leg leg-l" src="./assets/img/page-42/girl-leg-l.png" alt="">
+              <img class="leg leg-r" src="./assets/img/page-42/girl-leg-r.png" alt="">
+              <img src="./assets/img/page-42/girl-body.png" alt="">
+            </div>
+            <div class="figure figure--mirror">
+              <img class="leg leg-l" src="./assets/img/page-42/girl-leg-l.png" alt="">
+              <img class="leg leg-r" src="./assets/img/page-42/girl-leg-r.png" alt="">
+              <img src="./assets/img/page-42/girl-body.png" alt="">
+            </div>
+          </div>
+
+          <div id="fog" aria-hidden="true">
+            <div class="fog-strip" id="fog-a"></div>
+            <div class="fog-strip" id="fog-b"></div>
+          </div>
+
+          <div id="petals" aria-hidden="true">
+            <div class="petal-strip" id="petals-far"></div>
+            <div class="petal-strip" id="petals-near"></div>
+          </div>
+        </div>
+
+        <div id="rage" aria-hidden="true"></div>
+        <div id="vignette" aria-hidden="true"></div>
+        <div id="blackout" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="./assets/page42.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
