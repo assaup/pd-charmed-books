@@ -1,0 +1,83 @@
+/* Координаты — в % от картинки 1920×1920 */
+
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Мир: всё, что двигается вместе с камерой; origin — подпись */
+#world {
+  position: absolute;
+  inset: 0;
+  transform-origin: 60% 50%;
+  will-change: transform;
+}
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Чернила подписи; длину штриха задаёт page43.js */
+#ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#signature {
+  fill: none;
+  stroke: rgb(34, 26, 78);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.92;
+}
+
+/* Рука и её тень: контейнеры на весь кадр, origin — кончик пера */
+#hand,
+#hand-shadow {
+  position: absolute;
+  inset: 0;
+  transform-origin: 64.844% 48.906%;
+  will-change: transform;
+  pointer-events: none;
+}
+
+#hand { z-index: 4; }
+
+/* Тень: силуэт руки, ложится на лист и подпись */
+#hand-shadow {
+  z-index: 3;
+  mix-blend-mode: multiply;
+}
+
+#hand-shadow img {
+  filter: brightness(0) blur(12px);
+}
+
+/* Слой выходит за правый и нижний край — их режет overflow-wrapper */
+#hand img,
+#hand-shadow img {
+  position: absolute;
+  left: 48.626%;
+  top: 22.346%;
+  width: 76.719%;
+  height: 84.062%;
+}
+
+#vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(70% 70% at 58% 50%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(10, 8, 34, 0.55) 85%,
+      rgba(10, 8, 34, 0.85) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
