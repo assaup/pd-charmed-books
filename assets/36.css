@@ -1,0 +1,138 @@
+/* ==========================================================================
+   36.css — сцена страницы 36 «Погружение в цифровую бездну».
+   Сцена — одна цельная картинка. Поверх:
+     #holo  — голографический шлем: дышит светом, иногда мерцает,
+              сверху вниз по нему проходит полоса скана;
+     #beam  — луч от шлема к голове: по нему вниз стекают полосы данных.
+   Анимация целиком на CSS; page36.js только добавляет класс .is-running.
+   Координаты — в % от #scene. Шлем на bg.jpg: 32–69% по X, 10–42% по Y;
+   луч — от низа шлема (≈38%) к макушке (≈50%).
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* ---------- Луч ---------- */
+
+/* Трапеция от низа шлема к макушке. Полосы — повторяющийся градиент
+   с периодом 2.5vmin, который ползёт вниз (background-position).
+   Период в vmin, а не в %: так сдвиг на один период точный и шва не видно */
+#beam {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  clip-path: polygon(37% 38%, 63% 38%, 53.5% 50.5%, 46.5% 50.5%);
+  background: linear-gradient(180deg,
+      rgba(150, 245, 255, 0) 0%,
+      rgba(150, 245, 255, 0) 55%,
+      rgba(150, 245, 255, 0.4) 75%,
+      rgba(150, 245, 255, 0) 95%);
+  background-size: 100% 2.5vmin;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ---------- Шлем ---------- */
+
+/* Обрезка эллипсом по форме шлема */
+#holo {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  clip-path: ellipse(19% 16.5% at 50.5% 26%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+#holo-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(20% 17% at 50.5% 26%,
+      rgba(150, 245, 255, 0.5) 0%,
+      rgba(90, 210, 240, 0.2) 60%,
+      rgba(0, 0, 0, 0) 100%);
+  opacity: 0.4;
+}
+
+/* Полоса скана: светлая черта с «хвостом» сверху, высота 6% сцены */
+#holo-scan {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 6%;
+  background: linear-gradient(180deg,
+      rgba(170, 250, 255, 0) 0%,
+      rgba(170, 250, 255, 0.25) 75%,
+      rgba(220, 255, 255, 0.9) 96%,
+      rgba(220, 255, 255, 0) 100%);
+  transform: translateY(150%);   /* 150% от 6% = 9% сцены — над шлемом */
+  opacity: 0;
+}
+
+/* ---------- Анимация ---------- */
+
+.is-running #beam {
+  animation: beam-flow 1s linear infinite, beam-pulse 3s ease-in-out infinite;
+}
+
+.is-running #holo-glow {
+  animation: holo-breath 5s linear infinite;
+}
+
+.is-running #holo-scan {
+  animation: holo-scan 5s linear infinite;
+}
+
+/* Полосы стекают вниз ровно на один период — шов не виден */
+@keyframes beam-flow {
+  from { background-position: 0 0; }
+  to   { background-position: 0 2.5vmin; }
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.9; }
+}
+
+/* Дыхание шлема + короткое мерцание на 80–85% цикла */
+@keyframes holo-breath {
+  0%   { opacity: 0.35; }
+  30%  { opacity: 0.6; }
+  60%  { opacity: 0.4; }
+  80%  { opacity: 0.55; }
+  81%  { opacity: 0.1; }
+  82%  { opacity: 0.7; }
+  83%  { opacity: 0.15; }
+  85%  { opacity: 0.6; }
+  100% { opacity: 0.35; }
+}
+
+/* Скан: проход сверху вниз за первые 40% цикла (с 9% до 42% сцены) */
+@keyframes holo-scan {
+  0%   { transform: translateY(150%); opacity: 1; }
+  40%  { transform: translateY(700%); opacity: 1; }
+  41%  { opacity: 0; }
+  100% { transform: translateY(700%); opacity: 0; }
+}
+
+/* Уменьшение анимации в системе — всё стоит */
+@media (prefers-reduced-motion: reduce) {
+  .is-running #beam,
+  .is-running #holo-glow,
+  .is-running #holo-scan {
+    animation: none;
+  }
+}
