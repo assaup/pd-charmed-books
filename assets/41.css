@@ -1,0 +1,120 @@
+/* ==========================================================================
+   41.css — сцена страницы 41 «Скандал у матери».
+   Сцена — одна цельная картинка. Поверх три слоя света:
+     #father-fog — «туман» цвета фона на силуэте отца: силуэт медленно
+                   тает и проступает снова;
+     #rage       — розовая подсветка за матерью рывками вспыхивает —
+                   вспышки крика;
+     #pressure   — голубой свет вокруг Даяны дрожит и сжимается.
+   Анимация целиком на CSS; page41.js только добавляет класс .is-running.
+   Координаты — в % от #scene.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Туман над силуэтом отца (центр 39% 27%). Цвет — как фон вокруг него,
+   края мягко уходят в ноль, чтобы не задеть голову Даяны */
+#father-fog {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(14% 28% at 39% 27%,
+      rgba(55, 48, 128, 1) 0%,
+      rgba(55, 48, 128, 0.8) 55%,
+      rgba(55, 48, 128, 0) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Ярость: розовое пятно между матерью и Даяной (62% 48%) */
+#rage {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(20% 24% at 62% 48%,
+      rgba(230, 110, 255, 0.85) 0%,
+      rgba(180, 80, 220, 0.35) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Давление: голубой ореол по контуру Даяны (центр 47% 58%).
+   transform-origin в той же точке — ореол сжимается к ней */
+#pressure {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(27% 31% at 47% 58%,
+      rgba(0, 0, 0, 0) 68%,
+      rgba(90, 170, 255, 0.35) 82%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  transform-origin: 47% 58%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---------- Анимация ---------- */
+
+.is-running #father-fog {
+  animation: father-fade 9s ease-in-out infinite;
+}
+
+.is-running #rage {
+  animation: rage-flash 3.2s linear infinite;
+}
+
+.is-running #pressure {
+  animation: pressure-squeeze 3.2s ease-in-out infinite;
+}
+
+/* Отец: виден → тает почти до конца → снова проступает */
+@keyframes father-fade {
+  0%, 15%   { opacity: 0; }
+  50%, 60%  { opacity: 0.6; }
+  95%, 100% { opacity: 0; }
+}
+
+/* Крик: две резкие вспышки подряд, потом затишье */
+@keyframes rage-flash {
+  0%   { opacity: 0; }
+  4%   { opacity: 0.9; }
+  12%  { opacity: 0.2; }
+  16%  { opacity: 0.75; }
+  30%  { opacity: 0.1; }
+  55%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Ореол сжимается в момент крика и медленно отпускает */
+@keyframes pressure-squeeze {
+  0%   { transform: scale(1);    opacity: 0.35; }
+  10%  { transform: scale(0.94); opacity: 0.7; }
+  14%  { transform: scale(0.96); opacity: 0.55; }
+  18%  { transform: scale(0.93); opacity: 0.75; }
+  60%  { transform: scale(1);    opacity: 0.35; }
+  100% { transform: scale(1);    opacity: 0.35; }
+}
+
+/* Уменьшение анимации в системе — всё стоит */
+@media (prefers-reduced-motion: reduce) {
+  .is-running #father-fog,
+  .is-running #rage,
+  .is-running #pressure {
+    animation: none;
+  }
+}
