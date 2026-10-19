@@ -1,0 +1,114 @@
+/* ==========================================================================
+   45.css — сцена страницы 45 «Интересный вопрос, Даяна».
+   Сцена — одна цельная картинка. Поверх:
+     #man-fog     — темнота над головой и плечами мужчины: при открытии
+                    страницы он скрыт и за несколько секунд проявляется
+                    (один раз, дальше остаётся видимым);
+     #man-glow    — голубой контур вокруг него медленно «дышит»;
+     #screen-glow — экран ноутбука мягко мерцает.
+   Анимация целиком на CSS; page45.js только добавляет класс .is-running.
+   Координаты — в % от #scene. Мужчина: 60–100% по X, голова ≈ 70% 15%.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Темнота над мужчиной (центр 77% 24%). Цвет — как тёмный фон справа.
+   Края мягко уходят в ноль, чтобы не задеть голову Даяны.
+   По умолчанию прозрачна: если CSS-анимация не запустится,
+   мужчина просто виден, как на картинке */
+#man-fog {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(24% 34% at 77% 24%,
+      rgba(20, 20, 60, 1) 0%,
+      rgba(20, 20, 60, 1) 62%,
+      rgba(20, 20, 60, 0) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Контур: голубое свечение вокруг головы и плеч */
+#man-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(17% 20% at 70% 18%,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(120, 220, 240, 0.4) 70%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Экран ноутбука (центр 12% 78%) */
+#screen-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(9% 13% at 12% 78%,
+      rgba(180, 250, 255, 0.8) 0%,
+      rgba(100, 220, 235, 0.3) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ---------- Анимация ---------- */
+
+/* Проявление — один раз (forwards оставляет итоговое состояние) */
+.is-running #man-fog {
+  animation: man-appear 5s ease-in-out forwards;
+}
+
+/* Контур начинает дышать, когда мужчина уже проявился (задержка 3.5 с) */
+.is-running #man-glow {
+  animation: man-breath 4s ease-in-out 3.5s infinite;
+}
+
+.is-running #screen-glow {
+  animation: screen-flicker 3s ease-in-out infinite;
+}
+
+/* Скрыт 1.5 с (30% от 5 с), затем медленно тает */
+@keyframes man-appear {
+  0%, 30% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+@keyframes man-breath {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 0.6; }
+}
+
+/* Экран: ровное мерцание с короткой «заминкой» — экран замирает */
+@keyframes screen-flicker {
+  0%, 100% { opacity: 0.3; }
+  40%      { opacity: 0.55; }
+  60%      { opacity: 0.55; }
+  62%      { opacity: 0.15; }
+  65%      { opacity: 0.5; }
+}
+
+/* Уменьшение анимации в системе — всё стоит, мужчина виден сразу */
+@media (prefers-reduced-motion: reduce) {
+  .is-running #man-fog,
+  .is-running #man-glow,
+  .is-running #screen-glow {
+    animation: none;
+  }
+}
