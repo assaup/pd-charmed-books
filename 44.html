@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 44</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 44.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/44.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 44</p>
+        <h1>ГЛАВА 25. Точка невозврата</h1>
+        <div class="content-item">
+          <h3>179.  МОСКОВСКАЯ КОФЕЙНЯ - ВЕЧЕР (6 месяцев спустя)</h3>
+          <p>Даяна успешно сдала сессию. Она всё ещё в трауре и одиночестве. Говорит с Аней. Она поздравляет с окончанием сессии и предлагает работу переводчика. Даяна благодарит.</p>
+          <p>180. Даяна приходит в кафе, открывает свой роман «Лунное затмение», который почти закончен. Ей нужно написать финал. Воспоминания о Сайферии накрывают её с новой силой.</p>
+          <p>181. Под грустную музыку она вспоминает их разговоры, его признания, его голос. Она не может поставить точку в книге.</p>
+          <p>182. Вместо «The end» она пишет «To be continued...».</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — цельная иллюстрация + «сбоящие» воспоминания:
+         полосы облака воспоминаний иногда дёргаются, как помехи на видео;
+         звуковая волна и наушники пульсируют в такт музыке.
+         Вся анимация — CSS-keyframes в 44.css, page44.js только запускает её.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-44/bg.png" alt="Даяна в наушниках, вокруг неё облако воспоминаний">
+
+        <!-- Полосы-помехи: куски той же картинки, сдвигаются вбок -->
+        <div class="glitch" id="glitch-1" aria-hidden="true"></div>
+        <div class="glitch" id="glitch-2" aria-hidden="true"></div>
+        <div class="glitch" id="glitch-3" aria-hidden="true"></div>
+
+        <!-- Звуковая волна в центре и наушники -->
+        <div id="wave" aria-hidden="true"></div>
+        <div id="headphones" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 44 -->
+  <script src="./assets/page44.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>

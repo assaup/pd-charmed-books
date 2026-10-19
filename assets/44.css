@@ -1,0 +1,122 @@
+/* ==========================================================================
+   44.css — сцена страницы 44 «Точка невозврата».
+   Сцена — одна цельная картинка. Поверх:
+     .glitch     — три горизонтальные полосы облака воспоминаний: куски той
+                   же картинки, которые изредка дёргаются вбок, как помехи;
+     #wave       — звуковая волна в центре пульсирует в такт музыке;
+     #headphones — наушники Даяны мягко светятся в том же ритме.
+   Анимация целиком на CSS; page44.js только добавляет класс .is-running.
+   Координаты — в % от #scene. Облако воспоминаний: 15–85% по X, 8–56% по Y
+   (ниже — лицо Даяны, его помехи не трогают).
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* ---------- Помехи ---------- */
+
+/* Каждая полоса — вся картинка (путь от этого CSS-файла), обрезанная
+   clip-path до узкой ленты внутри облака. В покое невидима */
+.glitch {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: url("./img/page-44/bg.png") 0 0 / 100% 100% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* inset(сверху справа снизу слева) */
+#glitch-1 { clip-path: inset(14% 15% 80% 15%); }   /* поцелуй, головы */
+#glitch-2 { clip-path: inset(31% 15% 63% 15%); }   /* руки */
+#glitch-3 { clip-path: inset(46% 15% 50% 15%); }   /* волна, нижние кадры */
+
+/* ---------- Музыка ---------- */
+
+/* Центральная волна: вытянутое по горизонтали свечение (53.5% 47.5%) */
+#wave {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(11% 3.5% at 53.5% 47.5%,
+      rgba(170, 250, 255, 0.85) 0%,
+      rgba(110, 220, 240, 0.3) 55%,
+      rgba(0, 0, 0, 0) 100%);
+  transform-origin: 53.5% 47.5%;
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Наушники: две амбушюры (38% 72% и 66% 72%) */
+#headphones {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background:
+    radial-gradient(4% 5% at 38% 72%,
+      rgba(230, 160, 255, 0.7) 0%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(4% 5% at 66% 72%,
+      rgba(230, 160, 255, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* ---------- Анимация ---------- */
+
+/* Разные длительности — помехи не совпадают и выглядят случайными */
+.is-running #glitch-1 { animation: glitch-a 4.3s steps(1, end) infinite; }
+.is-running #glitch-2 { animation: glitch-b 5.9s steps(1, end) infinite; }
+.is-running #glitch-3 { animation: glitch-a 7.1s steps(1, end) infinite 1.5s; }
+
+.is-running #wave       { animation: wave-beat 0.9s ease-in-out infinite; }
+.is-running #headphones { animation: phones-beat 1.8s ease-in-out infinite; }
+
+/* Помеха: короткая серия рывков вбок в конце цикла, остальное время пусто */
+@keyframes glitch-a {
+  0%, 86%   { opacity: 0; transform: translateX(0); }
+  87%       { opacity: 1; transform: translateX(-2%); }
+  89%       { opacity: 1; transform: translateX(1.5%); }
+  91%       { opacity: 1; transform: translateX(-0.8%); }
+  93%, 100% { opacity: 0; transform: translateX(0); }
+}
+
+@keyframes glitch-b {
+  0%, 60%   { opacity: 0; transform: translateX(0); }
+  61%       { opacity: 1; transform: translateX(2.5%); }
+  63%       { opacity: 1; transform: translateX(-1%); }
+  65%, 100% { opacity: 0; transform: translateX(0); }
+}
+
+/* Волна «дышит» под музыку: растягивается по горизонтали и ярчает */
+@keyframes wave-beat {
+  0%, 100% { transform: scaleX(0.85); opacity: 0.25; }
+  50%      { transform: scaleX(1.1);  opacity: 0.7; }
+}
+
+@keyframes phones-beat {
+  0%, 100% { opacity: 0.15; }
+  50%      { opacity: 0.55; }
+}
+
+/* Уменьшение анимации в системе — всё стоит */
+@media (prefers-reduced-motion: reduce) {
+  .is-running .glitch,
+  .is-running #wave,
+  .is-running #headphones {
+    animation: none;
+  }
+}
