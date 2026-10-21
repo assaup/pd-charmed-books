@@ -1,0 +1,110 @@
+/* ==========================================================================
+   35.css — сцена страницы 35 «Связь обрывается навсегда».
+   Сцена — одна цельная картинка. Поверх голограммы над панелью:
+     #holo-glow  — свечение: мягко мерцает, раз в цикл «сбоит»;
+     #holo-lines — строки развёртки, ползут сверху вниз.
+   Анимация целиком на CSS; page35.js только добавляет класс .is-running.
+   Координаты — в % от #scene. Голограмма на bg.png: 38.5–70% по X,
+   26–50% по Y, в перспективе — отсюда clip-path трапецией.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate screen смешивался бы с фоном страницы, а не с картинкой */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Голограмма: на всю сцену, обрезана по форме экрана-голограммы */
+#holo {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  clip-path: polygon(39.3% 26.8%, 69.5% 28%, 69.5% 49.5%, 39.8% 45%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform;
+}
+
+#holo-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(18% 14% at 54% 37%,
+      rgba(150, 245, 255, 0.55) 0%,
+      rgba(120, 200, 255, 0.25) 55%,
+      rgba(0, 0, 0, 0) 100%);
+  opacity: 0.4;
+}
+
+/* Полосы развёртки: тонкие светлые линии через каждые 0.6% сцены */
+#holo-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg,
+      rgba(170, 250, 255, 0.22) 0,
+      rgba(170, 250, 255, 0.22) 0.15%,
+      rgba(0, 0, 0, 0) 0.15%,
+      rgba(0, 0, 0, 0) 0.6%);
+  opacity: 0.6;
+}
+
+/* ---------- Анимация ---------- */
+
+.is-running #holo-glow {
+  animation: holo-shimmer 6s linear infinite;
+}
+
+.is-running #holo-lines {
+  animation: holo-scroll 1.2s linear infinite;
+}
+
+.is-running #holo {
+  animation: holo-glitch 6s steps(1, end) infinite;
+}
+
+/* Мерцание: плавно «дышит», а на 70–76% цикла — сбой: резкие провалы */
+@keyframes holo-shimmer {
+  0%   { opacity: 0.35; }
+  20%  { opacity: 0.55; }
+  40%  { opacity: 0.4; }
+  60%  { opacity: 0.6; }
+  70%  { opacity: 0.1; }
+  71%  { opacity: 0.8; }
+  72%  { opacity: 0.05; }
+  74%  { opacity: 0.7; }
+  75%  { opacity: 0.15; }
+  76%  { opacity: 0.5; }
+  100% { opacity: 0.35; }
+}
+
+/* Полосы ползут вниз ровно на один период — шов не виден */
+@keyframes holo-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(0.6%); }
+}
+
+/* Во время сбоя голограмма дёргается вбок рывками (steps — без плавности) */
+@keyframes holo-glitch {
+  0%, 69%  { transform: translateX(0); }
+  70%      { transform: translateX(-0.6%); }
+  71%      { transform: translateX(0.4%); }
+  73%      { transform: translateX(-0.3%); }
+  75%      { transform: translateX(0.5%); }
+  76%, 100% { transform: translateX(0); }
+}
+
+/* Уменьшение анимации в системе — голограмма просто светится */
+@media (prefers-reduced-motion: reduce) {
+  .is-running #holo,
+  .is-running #holo-glow,
+  .is-running #holo-lines {
+    animation: none;
+  }
+}
