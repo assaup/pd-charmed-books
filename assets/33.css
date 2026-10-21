@@ -1,0 +1,75 @@
+/* ==========================================================================
+   33.css — сцена страницы 33 «Лифт привёз в кабинет Сингера».
+   Сцена — одна цельная картинка. Поверх:
+     #windows     — окна города: page33.js кладёт на каждое горящее окно
+                    тёмную «шторку» и время от времени гасит/зажигает;
+     #lift-button — кнопка лифта мягко пульсирует (только CSS).
+   Координаты — в % от #scene.
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Без isolate blend-режимы смешивались бы с фоном страницы */
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* ---------- Окна ---------- */
+
+#windows {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* «Шторка» поверх окна. multiply только темнит — окно гаснет
+   до цвета стены дома. Видимость меняет класс .is-off из JS */
+.window {
+  position: absolute;
+  background: rgb(45, 50, 95);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.12s linear;
+}
+
+.window.is-off {
+  opacity: 0.9;
+}
+
+/* ---------- Кнопка лифта ---------- */
+
+/* Центр свечения — стрелка «вверх» на панели, 11.9% 54.6% */
+#lift-button {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(2.2% 2.2% at 11.9% 54.6%,
+      rgba(170, 245, 255, 0.95) 0%,
+      rgba(90, 210, 240, 0.4) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: lift-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes lift-pulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.9; }
+}
+
+/* Уменьшение анимации в системе — кнопка просто горит */
+@media (prefers-reduced-motion: reduce) {
+  #lift-button {
+    animation: none;
+    opacity: 0.6;
+  }
+}

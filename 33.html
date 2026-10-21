@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>НАЗВАНИЕ КНИГИ — страница 33</title>
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+
+  <!-- Стили: main.css (всё общее + адаптивность), 33.css (только сцена), ui.css (интерфейс ридера) -->
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="stylesheet" href="./assets/33.css">
+  <link rel="stylesheet" href="./assets/ui.css">
+
+  <!-- Снять лоадер сразу после загрузки страницы -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    });
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=104276774', 'ym');
+    ym(104276774, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <!-- /Yandex.Metrika counter -->
+
+  <script src="./postMessageHandler.js"></script>
+  <script src="./assets/ui.js"></script>
+</head>
+
+<body>
+
+  <!-- Прелоадер -->
+  <div id="loader">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <main>
+
+    <!-- ================================================================
+         ТЕКСТ СТРАНИЦЫ — единственное место, куда переносится текст.
+         Один <p> = один абзац. Заголовок — <h1>. Подзаголовок —
+         <div class="content-item"><h3>…</h3></div>. Дублировать для
+         мобильных НЕ нужно: раскладка перестраивается в main.css.
+         ================================================================ -->
+    <section id="content">
+      <div id="textbox">
+        <p>Экран 33</p>
+        <div class="content-item">
+          <p>136. Даяна соглашается. Она идет в кафетерий, а по пути в туалет теряется в лабиринтах коридоров.</p>
+          <p>137. Голографические указатели приводят её к лифту, который везёт её совсем не туда, куда нужно. Двери открываются, и перед ней предстает огромный кабинет с панорамными окнами.</p>
+          <p>138. За столом сидит Эрик Сингер. Дверь за спиной Даяны бесшумно закрывается.</p>
+        </div>
+        <h1>ГЛАВА 18. Сделка с дьяволом</h1>
+        <div class="content-item">
+          <h3>139.  КАБИНЕТ СИНГЕРА - ДЕНЬ</h3>
+          <p>Сингер спокойно приветствует Даяну, сообщая, что давно ждал её визита. Он знает о её миссии.</p>
+          <p>140. Сингер называет Сайферия своим «имуществом», которое она обязана ему вернуть. Он утверждает, что все чувства Сайферия к ней — лишь хорошо прописанный алгоритм, созданный им, Сингером.</p>
+          <p>141. Даяна отказывается верить. Тогда Сингер предъявляет ультиматум: она помогает ему получить доступ к Сайферию, или её брат Майк будет стерт из реальности, как файл.</p>
+          <p>142. В доказательство своих слов он выводит на голограмме цифровой профиль Даяны, показывая, что каждый человек — лишь набор данных, которые можно уничтожить.</p>
+          <p>143. Сингер оставляет ей голографическую визитку и даёт время подумать, отпуская её.</p>
+          <p>144. Даяна возвращается в кабинет Майка, но не признается где была на самом деле. Они возвращаются домой.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         СЦЕНА — цельная иллюстрация + мигающие окна города
+         и светящаяся кнопка лифта. Позиции — в 33.css,
+         окна создаёт page33.js.
+         ================================================================ -->
+    <div id="scene">
+      <div id="overflow-wrapper">
+        <img class="scene__img" id="bg" src="./assets/img/page-33/bg.png" alt="Даяна в дверях лифта перед кабинетом с панорамными окнами">
+
+        <!-- Окна города: заполняет page33.js -->
+        <div id="windows" aria-hidden="true"></div>
+
+        <!-- Подсветка кнопки лифта: CSS-градиент + keyframes -->
+        <div id="lift-button" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Логика сцены страницы 33 -->
+  <script src="./assets/page33.js"></script>
+
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/104276774" style="position:absolute; left:-9999px;" alt=""></div>
+  </noscript>
+</body>
+
+</html>
