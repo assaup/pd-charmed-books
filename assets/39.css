@@ -1,0 +1,165 @@
+/* ---------- Слои сцены ---------- */
+
+#bg {
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Сирена: конец коридора на 39.jpg — 55% 21% */
+#alarm {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    radial-gradient(14% 18% at 55% 21%, rgba(255, 60, 90, 0.95) 0%, rgba(255, 40, 80, 0) 100%),
+    radial-gradient(40% 30% at 55% 30%, rgba(255, 40, 80, 0.35) 0%, rgba(255, 40, 80, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Потолочные панели: 52% 4%, 54% 10%, 54% 14% */
+#lights {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background:
+    radial-gradient(9% 2.5% at 52% 4%, rgba(170, 200, 255, 0.95) 0%, rgba(120, 150, 255, 0) 100%),
+    radial-gradient(6% 2% at 54% 10.5%, rgba(170, 200, 255, 0.85) 0%, rgba(120, 150, 255, 0) 100%),
+    radial-gradient(4% 1.5% at 54% 14%, rgba(170, 200, 255, 0.75) 0%, rgba(120, 150, 255, 0) 100%),
+    radial-gradient(22% 14% at 53% 8%, rgba(120, 150, 255, 0.30) 0%, rgba(120, 150, 255, 0) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Лучи — в общем контейнере: камера двигает контейнер, page39.js
+   поворачивает каждый луч. Blend на контейнере, иначе transform
+   изолирует лучи и смешивать их будет не с чем */
+#beams {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Луч фонаря: клин от охранника к зрителю. Вершина клина — левый край,
+   там же transform-origin, поворот задаёт page39.js */
+.beam {
+  position: absolute;
+  width: 75%;
+  height: 22%;
+  margin-top: -11%;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg,
+      rgba(220, 230, 255, 0.55) 0%,
+      rgba(180, 200, 255, 0.18) 45%,
+      rgba(0, 0, 0, 0) 100%);
+  -webkit-clip-path: polygon(0 48%, 100% 0, 100% 100%, 0 52%);
+  clip-path: polygon(0 48%, 100% 0, 100% 100%, 0 52%);
+  filter: blur(6px);
+}
+
+/* Фонари в руках охранников */
+#beam-a {
+  left: 59%;
+  top: 29%;
+}
+
+#beam-b {
+  left: 52%;
+  top: 28%;
+}
+
+/* Окно пыли: только верхняя половина, к полу пыль растворяется */
+#dust {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 80%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 80%);
+}
+
+/* Лента пыли высотой в два окна, плитка — ровно одно окно:
+   сдвиг на +50% бесшовный. Начинаем с -100% окна, падаем вниз */
+#dust-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -100%;
+  height: 200%;
+  background-repeat: repeat-y;
+  background-size: 100% 50%;
+  background-image:
+    radial-gradient(0.5% 0.5% at 22% 8%, rgba(210, 220, 255, 0.90), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.3% 0.3% at 35% 21%, rgba(230, 235, 255, 0.85), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.6% 0.6% at 47% 13%, rgba(200, 215, 255, 0.70), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.4% 0.4% at 58% 31%, rgba(220, 230, 255, 0.85), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.3% 0.3% at 66% 5%, rgba(240, 240, 255, 0.90), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.5% 0.5% at 74% 44%, rgba(210, 220, 255, 0.70), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.4% 0.4% at 30% 55%, rgba(225, 230, 255, 0.80), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.6% 0.6% at 81% 18%, rgba(205, 215, 255, 0.60), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.3% 0.3% at 41% 72%, rgba(240, 240, 255, 0.90), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.5% 0.5% at 62% 86%, rgba(215, 225, 255, 0.75), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.4% 0.4% at 15% 38%, rgba(220, 230, 255, 0.70), rgba(0, 0, 0, 0) 70%),
+    radial-gradient(0.3% 0.3% at 88% 64%, rgba(240, 240, 255, 0.80), rgba(0, 0, 0, 0) 70%);
+  animation: dust-fall 7s linear infinite;
+  will-change: transform;
+}
+
+@keyframes dust-fall {
+  to { transform: translateY(50%); }
+}
+
+/* Провал света при толчке: обычное наложение, затемняет */
+#dim {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  background: rgb(4, 3, 18);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: radial-gradient(60% 62% at 46% 42%,
+      rgba(0, 0, 0, 0) 40%,
+      rgba(8, 4, 30, 0.60) 78%,
+      rgba(8, 4, 30, 0.92) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Опоры для анимации (значения задаёт page39.js) ---------- */
+
+#overflow-wrapper {
+  isolation: isolate;
+}
+
+/* Камера держит Даяну (45% 40%). Всё, что нарисовано «на картинке»,
+   двигается вместе с ней — иначе свет отклеится от ламп */
+#bg,
+#alarm,
+#lights,
+#beams,
+#dust {
+  transform-origin: 45% 40%;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dust-strip {
+    animation: none;
+  }
+}
