@@ -1,0 +1,52 @@
+/* ==========================================================================
+   23.css — сцена страницы 23 «Два портрета на мониторе».
+   Сцена — 3 слоя одной картинки (см. комментарий в 23.html):
+   на #bg экран пустой, контуры #pink и #cyan загораются и гаснут
+   в противофазе (анимация — assets/page23.js), drop-shadow даёт ореол.
+   Внизу — стили кликабельных вариантов квиза (скрипт — assets/quiz.js).
+   ========================================================================== */
+
+/* ---------- Слои сцены ---------- */
+
+#bg,
+#pink,
+#cyan {
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+#bg   { z-index: 2; }
+#pink { z-index: 3; }
+#cyan { z-index: 4; }
+
+/* Прозрачность обоих слоёв каждый кадр задаёт page23.js */
+#pink,
+#cyan {
+  opacity: 0;
+  pointer-events: none;
+}
+#pink {
+  filter: drop-shadow(0 0 6px rgba(255, 90, 170, 0.9));
+}
+#cyan {
+  filter: drop-shadow(0 0 6px rgba(90, 230, 240, 0.9));
+}
+
+/* ---------- Квиз: варианты кликабельны ---------- */
+
+#textbox .quiz li {
+  cursor: pointer;
+  padding: 2px 8px;
+  margin-left: -8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+#textbox .quiz li:hover,
+#textbox .quiz li:focus-visible {
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+#textbox .quiz li.is-selected {
+  background-color: rgba(79, 177, 196, 0.22);
+  box-shadow: inset 2px 0 0 rgba(79, 177, 196, 1);
+}
